@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>𝐉𝐎𝐘//𝐕𝐀𝐈_[ 𝐎𝐖𝐍𝐄𝐑 ]☢️</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;800&family=JetBrains+Mono:wght@700&display=swap');
+
+        :root {
+            --primary: #00ffa3;
+            --secondary: #dc00ff;
+            --glass: rgba(0, 0, 0, 0.85);
+        }
+
+        body, html {
+            margin: 0; padding: 0;
+            width: 100%; height: 100%;
+            overflow: hidden; background: #000;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .game-frame { position: absolute; inset: 0; z-index: 1; }
+        iframe { width: 100%; height: 100%; border: none; }
+
+        /* Main Tool Box RGB */
+        .elite-card {
+            position: fixed;
+            top: 150px; left: 20px;
+            width: 140px;
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            border-radius: 15px;
+            padding: 12px;
+            z-index: 9999;
+            touch-action: none;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-sizing: border-box;
+            border: 2px solid transparent;
+            box-shadow: 0 0 15px rgba(0, 255, 163, 0.3);
+            animation: rgb-glow 3s linear infinite;
+        }
+
+        @keyframes rgb-glow {
+            0% { border-color: #ff0000; box-shadow: 0 0 15px #ff0000; }
+            33% { border-color: #00ff00; box-shadow: 0 0 15px #00ff00; }
+            66% { border-color: #0000ff; box-shadow: 0 0 15px #0000ff; }
+            100% { border-color: #ff0000; box-shadow: 0 0 15px #ff0000; }
+        }
+
+        .square-mode {
+            width: 110px !important;
+            height: 110px !important;
+            padding: 8px !important;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            animation: rgb-glow-intense 2s linear infinite;
+        }
+
+        @keyframes rgb-glow-intense {
+            0% { border-color: #ff0000; box-shadow: 0 0 25px #ff0000; }
+            33% { border-color: #00ff00; box-shadow: 0 0 25px #00ff00; }
+            66% { border-color: #0000ff; box-shadow: 0 0 25px #0000ff; }
+            100% { border-color: #ff0000; box-shadow: 0 0 25px #ff0000; }
+        }
+
+        .header-title {
+            font-size: 8px;
+            font-weight: 800;
+            color: #fff;
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+            background: linear-gradient(to right, #ff0000, #00ff00, #0000ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .input-box {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
+            padding: 6px;
+            color: white;
+            width: 100%;
+            font-size: 10px;
+            text-align: center;
+            margin-bottom: 8px;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        .login-btn {
+            background: white; color: black;
+            border: none; width: 100%;
+            padding: 8px; border-radius: 8px;
+            font-size: 9px; font-weight: 800;
+            cursor: pointer;
+        }
+
+        .result-view { display: none; text-align: center; width: 100%; }
+
+        .res-text {
+            font-size: 14px;
+            font-weight: 800;
+            margin: 4px 0;
+            text-transform: uppercase;
+            text-shadow: 0 0 10px currentColor;
+            animation: text-pulse 1s infinite alternate;
+        }
+
+        @keyframes text-pulse {
+            from { transform: scale(1); opacity: 0.8; }
+            to { transform: scale(1.1); opacity: 1; }
+        }
+
+        .timer-box {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px; color: #fff; font-weight: bold;
+        }
+
+        .ring-container {
+            position: relative;
+            width: 55px; height: 55px;
+            margin: 0 auto 5px;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        .ring-svg {
+            position: absolute; top: 0; left: 0;
+            width: 55px; height: 55px;
+            transform: rotate(-90deg);
+        }
+
+        .ring-circle {
+            fill: transparent;
+            stroke-width: 4;
+            stroke-dasharray: 172.7;
+            stroke-dashoffset: 0;
+            transition: stroke-dashoffset 1s linear;
+        }
+
+        .mini-footer {
+            display: flex; justify-content: space-around;
+            width: 100%; margin-top: 6px;
+        }
+
+        .action-dot {
+            width: 16px; height: 16px;
+            border-radius: 5px; border: none;
+            font-size: 8px; color: white;
+            display: flex; align-items: center; justify-content: center;
+            background: rgba(255,255,255,0.15);
+        }
+
+        #mini-trigger {
+            position: fixed; bottom: 40%; left: 0;
+            width: 30px; height: 30px;
+            background: var(--glass);
+            border: 2px solid #00ffa3;
+            border-radius: 0 10px 10px 0;
+            display: none; align-items: center; justify-content: center;
+            z-index: 10000; color: #00ffa3;
+            animation: rgb-glow 2s linear infinite;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="game-frame">
+        <iframe src="https://tkclub2.com/#/register?invitationCode=34285217808"><https://tkclub2.com/#/home/AllLotteryGames/WinGo?id=1></iframe>
+    </div>
+
+    <div class="elite-card" id="toolBox">
+        <div id="header-id" class="header-title">𝐉𝐎𝐘//𝐕𝐀𝐈_[𝐎𝐖𝐍𝐄𝐑]☢️</div>
+
+        <div id="login-section">
+            <input type="password" id="key-input" class="input-box" placeholder="ACCESS KEY">
+            <button class="login-btn" onclick="checkAuth()">LOGIN</button>
+        </div>
+
+        <div id="result-section" class="result-view">
+            <div class="ring-container">
+                <svg class="ring-svg">
+                    <circle class="ring-circle" id="progress-ring" cx="27.5" cy="27.5" r="25"></circle>
+                </svg>
+                <div class="timer-box" id="timer-num">30</div>
+            </div>
+            
+            <div id="res-text" class="res-text">WAIT</div>
+
+            <div class="mini-footer">
+                <button class="action-dot" onclick="minimizeTool()">➖</button>
+                <a href="https://t.me/+FdMf_SJE-ONlZWE1" target="_blank" class="action-dot" style="background: #0088cc; text-decoration: none;">TG</a>
+                <button class="action-dot" onclick="location.reload()" style="background: #ff4444;">✖</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="mini-trigger" onclick="restoreTool()">▶</div>
+
+    <script>
+        function checkAuth() {
+            const pin = document.getElementById("key-input").value;
+            if(pin === "72467878") {
+                document.getElementById("login-section").style.display = "none";
+                document.getElementById("header-id").style.display = "none";
+                document.getElementById("toolBox").classList.add("square-mode");
+                document.getElementById("result-section").style.display = "block";
+                startEngine();
+            } else {
+                alert("WRONG KEY!");
+            }
+        }
+
+        // Draggable Logic
+        const box = document.getElementById("toolBox");
+        let active = false, currentX, currentY, initialX, initialY, xOffset = 0, yOffset = 0;
+
+        box.addEventListener("touchstart", (e) => {
+            if(e.target.tagName === 'INPUT' || e.target.tagName === 'BUTTON' || e.target.closest('a')) return;
+            initialX = e.touches[0].clientX - xOffset;
+            initialY = e.touches[0].clientY - yOffset;
+            active = true;
+        });
+
+        document.addEventListener("touchend", () => active = false);
+        document.addEventListener("touchmove", (e) => {
+            if (active) {
+                e.preventDefault();
+                currentX = e.touches[0].clientX - initialX;
+                currentY = e.touches[0].clientY - initialY;
+                xOffset = currentX;
+                yOffset = currentY;
+                box.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
+            }
+        });
+
+        function minimizeTool() {
+            box.style.display = "none";
+            document.getElementById("mini-trigger").style.display = "flex";
+        }
+
+        function restoreTool() {
+            box.style.display = "block";
+            document.getElementById("mini-trigger").style.display = "none";
+        }
+
+        // Signal Engine with Custom Logic
+        function startEngine() {
+            // আপনার দেওয়া নির্দিষ্ট সিকোয়েন্স
+            const customLogic = [
+                "BIG", "SMALL", "SMALL", "BIG", "SMALL", "BIG", "BIG", "BIG", 
+                "SMALL", "SMALL", "SMALL", "BIG", "SMALL", "BIG", "SMALL", 
+                "BIG", "SMALL", "SMALL", "BIG", "BIG", "BIG", "SMALL", 
+                "SMALL", "BIG", "SMALL", "BIG", "BIG", "BIG", "SMALL"
+            ];
+
+            const ring = document.getElementById("progress-ring");
+            const circumference = 2 * Math.PI * 25;
+
+            function update() {
+                const now = new Date();
+                const seconds = now.getSeconds();
+                const remaining = 30 - (seconds % 30);
+                
+                // ৩০ সেকেন্ড অন্তর লজিক পরিবর্তন
+                const totalPeriods = Math.floor(now.getTime() / 30000);
+                const logicIndex = totalPeriods % customLogic.length;
+                const currentRes = customLogic[logicIndex];
+
+                const resDisplay = document.getElementById("res-text");
+                resDisplay.innerText = currentRes;
+                
+                // Color Styling based on result
+                if(currentRes === "BIG") {
+                    resDisplay.style.color = "#00ffa3"; // Greenish
+                    ring.style.stroke = "#00ffa3";
+                } else {
+                    resDisplay.style.color = "#ff00ff"; // Pinkish/Purple
+                    ring.style.stroke = "#ff00ff";
+                }
+
+                // Ring Timer Animation
+                const offset = circumference - (remaining / 30) * circumference;
+                ring.style.strokeDashoffset = offset;
+
+                document.getElementById("timer-num").innerText = remaining;
+            }
+
+            setInterval(update, 1000);
+            update();
+        }
+    </script>
+
+<style>.qc-cmp-showing { visibility: hidden !important; } body.didomi-popup-open { overflow: auto !important; } #didomi-host { visibility: hidden !important; }
+    </style>
+  </body>
+</html>
